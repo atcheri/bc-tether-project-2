@@ -34,4 +34,35 @@ contract Tether {
 
         return true;
     }
+
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public returns (bool success) {
+        allowances[msg.sender][_spender] = _value;
+
+        emit Approved(msg.sender, _spender, _value);
+
+        return true;
+    }
+
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        require(balances[_from] >= _value, "not enough fund to transfer");
+        require(
+            allowances[_from][msg.sender] >= _value,
+            "not allowed to transfer more than the what remains"
+        );
+
+        balances[_from] -= _value;
+        balances[_to] += _value;
+        allowances[_from][msg.sender] -= _value;
+
+        emit Transfered(_from, _to, _value);
+
+        return true;
+    }
 }
