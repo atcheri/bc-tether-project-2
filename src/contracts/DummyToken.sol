@@ -4,7 +4,7 @@ pragma solidity >=0.4.22 <0.9.0;
 contract DummyToken {
     string public name = "Dummy Token";
     string public symbol = "DumToken";
-    uint totalSupply = 100000000000000000;
+    uint totalSupply = 1000000000000000000000000;
     uint decimal = 18;
 
     event Transfered(address indexed _from, address indexed _to, uint _value);
